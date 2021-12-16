@@ -61,26 +61,43 @@ public class VikingController : MonoBehaviour
             Vector3 rotationToAdd = new Vector3(0, -90, 0);
             transform.Rotate(rotationToAdd);
         }
-
+        if (!onGround&&Input.GetKeyDown(KeyCode.Space))
+        {
+            
+            Debug.Log("onGround " + onGround);
+            
+        }
         if (onGround && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(jumpingForce * Vector3.up);
+            Debug.Log("onGround is " + onGround);
+            onGround = false;
         }
         an.SetBool("Run", run);
     }
-
+    
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("enter" + collision.transform.name);
         if (collision.transform.name == "floor_01_variability_15")
         {
             onGround = true;
         }
-    }
+    }/*
     private void OnCollisionExit(Collision collision)
     {
         if(collision.transform.name == "floor_01_variability_15")
         {
             onGround = false;
+        }
+    }*/
+    private void OnCollisionStay(Collision collision)
+    {
+        //Debug.Log(collision.transform.name);
+        
+        if (collision.transform.name == "floor_01_variability_15")
+        {
+            onGround = true;
         }
     }
 }

@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class GroundTile : MonoBehaviour
 {
+    
     GroundSpawner groundSpawner;
     // Start is called before the first frame update
     void Start()
     {
+        int hasObstacle = Random.Range(0, 5);
+        if(hasObstacle == 4)
+            SpawnObstacle();
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
     }
 
@@ -19,7 +23,24 @@ public class GroundTile : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        groundSpawner.SpawnTile();
+        //Debug.Log("exited");
+        int path = Random.Range(1, 3);
+        //Debug.Log("path" + path);
+        if(path == 1)
+        {
+            groundSpawner.SpawnTile();
+        }
+        else if(path==2)
+        {
+            groundSpawner.SpawnTileRight();
+        }
         Destroy(gameObject, 2);
+    }
+    public GameObject obstaclePrefab;
+    
+    void SpawnObstacle()
+    {
+        Transform spawnPoint = transform.GetChild(2).transform;
+        Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, transform);
     }
 }
