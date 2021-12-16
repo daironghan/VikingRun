@@ -12,6 +12,7 @@ public class CameraFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         //offset = transform.position - target.position;
     }
 
@@ -19,7 +20,7 @@ public class CameraFollow : MonoBehaviour
     void Update()
     {
         //transform.position = target.position + offset;
-
+        transform.rotation = Quaternion.Euler(30, 0, 0);
         transform.position = target.transform.position - target.transform.forward * cameraDistance;
         transform.LookAt(target.transform.position);
         transform.position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);

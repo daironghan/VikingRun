@@ -68,10 +68,13 @@ public class VikingController : MonoBehaviour
             
         }
         if (onGround && Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.AddForce(jumpingForce * Vector3.up);
+        {   
+
+            
             Debug.Log("onGround is " + onGround);
             onGround = false;
+            rb.AddForce(jumpingForce * Vector3.up);
+
         }
         an.SetBool("Run", run);
     }
@@ -79,18 +82,20 @@ public class VikingController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("enter" + collision.transform.name);
-        if (collision.transform.name == "floor_01_variability_15")
+        if (collision.transform.name == "floor_01_variability_15" || collision.transform.name == "Obstacle(Clone)" || collision.transform.name == "ObstacleRight(Clone)")
         {
             onGround = true;
         }
-    }/*
+    }
     private void OnCollisionExit(Collision collision)
     {
-        if(collision.transform.name == "floor_01_variability_15")
+        
+        if (collision.transform.name == "floor_01_variability_15")
         {
             onGround = false;
+            Debug.Log("leave floor");
         }
-    }*/
+    }
     private void OnCollisionStay(Collision collision)
     {
         //Debug.Log(collision.transform.name);

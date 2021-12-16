@@ -9,8 +9,8 @@ public class GroundTile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int hasObstacle = Random.Range(0, 5);
-        if(hasObstacle == 4)
+        int hasObstacle = Random.Range(0, 8);
+        if(hasObstacle == 7)
             SpawnObstacle();
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
     }
