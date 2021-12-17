@@ -40,6 +40,15 @@ public class GroundSpawner : MonoBehaviour
     public void SpawnTileRight()
     {
         GameObject temp = Instantiate(groundTileRight, nextSpawnPoint, Quaternion.identity);
-        nextSpawnPoint = temp.transform.GetChild(1).transform.position;
+        int hasHole = Random.Range(0, 8);
+        if (hasHole == 7)
+        {
+            Debug.Log("Hole");
+            nextSpawnPoint = temp.transform.GetChild(3).transform.position;
+            GameObject temp2 = Instantiate(groundTileRight, nextSpawnPoint, Quaternion.identity);
+            nextSpawnPoint = temp2.transform.GetChild(1).transform.position;
+        }
+        else
+            nextSpawnPoint = temp.transform.GetChild(1).transform.position;
     }
 }

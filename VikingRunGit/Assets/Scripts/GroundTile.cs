@@ -6,6 +6,7 @@ public class GroundTile : MonoBehaviour
 {
     
     GroundSpawner groundSpawner;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,7 @@ public class GroundTile : MonoBehaviour
         if(hasObstacle == 7)
             SpawnObstacle();
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+        SpawnCoin();
     }
 
     // Update is called once per frame
@@ -43,4 +45,26 @@ public class GroundTile : MonoBehaviour
         Transform spawnPoint = transform.GetChild(2).transform;
         Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, transform);
     }
+    public GameObject coinPrefab;
+    void SpawnCoin()
+    {
+        GameObject temp = Instantiate(coinPrefab);
+        temp.transform.position = GetRandomPointInCollider(GetComponent<Collider>());
+    }
+    Vector3 GetRandomPointInCollider(Collider collider)
+    {
+        Vector3 point = new Vector3(
+            Random.Range(collider.bounds.min.x, collider.bounds.max.x),
+            Random.Range(collider.bounds.min.y, collider.bounds.max.y),
+            Random.Range(collider.bounds.min.z, collider.bounds.max.z)
+            );
+        if(point!=collider.ClosestPoint(point))
+        {
+            point = GetRandomPointInCollider(collider);
+        }
+        //coin height
+        point.y = 1;
+        return point;
+    }
+
 }
