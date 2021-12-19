@@ -48,7 +48,7 @@ public class GroundTile : MonoBehaviour
     public GameObject coinPrefab;
     void SpawnCoin()
     {
-        GameObject temp = Instantiate(coinPrefab);
+        GameObject temp = Instantiate(coinPrefab, transform);
         temp.transform.position = GetRandomPointInCollider(GetComponent<Collider>());
     }
     Vector3 GetRandomPointInCollider(Collider collider)

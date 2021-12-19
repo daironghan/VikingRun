@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collision))]
 [RequireComponent(typeof(Animator))]
@@ -10,6 +11,7 @@ public class VikingController : MonoBehaviour
     public float jumpingForce;
     private bool onGround;
     private bool run;
+    bool alive = true;
     Rigidbody rb;
     Animator an;
     void Awake()
@@ -25,8 +27,11 @@ public class VikingController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-
+    {
+        if (!alive)
+            return;
+        if (transform.position.y < -5)
+            Die();
         run = false;
         if(Input.GetKey(KeyCode.W))
         {
@@ -104,5 +109,11 @@ public class VikingController : MonoBehaviour
         {
             onGround = true;
         }
+    }
+    public void Die()
+    {
+        alive = false;
+        //restart game
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
