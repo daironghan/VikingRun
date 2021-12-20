@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public int coin;
+    public static int coin;
     public static GameManager inst;
     public Text txtCoin;
+    
     private void Awake()
     {
         inst = this;
@@ -28,4 +29,5 @@ public class GameManager : MonoBehaviour
         coin++;
         txtCoin.text = "Coins: " + coin;
     }
+    
 }

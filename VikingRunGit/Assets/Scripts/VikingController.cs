@@ -14,6 +14,7 @@ public class VikingController : MonoBehaviour
     bool alive = true;
     Rigidbody rb;
     Animator an;
+    public GameOverMenu gameOver;
     void Awake()
     {
         
@@ -114,6 +115,7 @@ public class VikingController : MonoBehaviour
     {
         alive = false;
         //restart game
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameOver.Setup();
+        Time.timeScale = 0f;
     }
 }
