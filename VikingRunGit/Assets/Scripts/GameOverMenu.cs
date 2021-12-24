@@ -21,6 +21,6 @@ public class GameOverMenu : MonoBehaviour
     public void Setup()
     {
         gameObject.SetActive(true);
-        txtScore.text = "Coins" + GameManager.coin;
+        txtCoins.text = "Coins: " + GameManager.inst.coin;
     }
 }

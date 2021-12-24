@@ -10,6 +10,7 @@ public class SceneSwitcher : MonoBehaviour, IPointerClickHandler
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(SceneIndexDestination);
+        Time.timeScale = 1f;
     }
 
     // Start is called before the first frame update
